@@ -241,6 +241,7 @@ namespace Payroll
             {
                 MessageBox.Show(ex.Message);
             }
+            database.DrawTables();
             updateForm();
         }
 
