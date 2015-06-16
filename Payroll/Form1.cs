@@ -94,11 +94,13 @@ namespace Payroll
                                                         "when check_run_status = 'Approved' then 'Pending' else 'Approved' end " +
                                                         "Where employee_ID = {0}", currentMouseOverRow), database.dbConnection);
                 database.command.ExecuteNonQuery();
+                database.DrawTables();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             updateForm();
         }
 
@@ -147,6 +149,15 @@ namespace Payroll
                 throw (new Exception("Fields can't be empty"));
             }
 
+            if (c.Tag == "DateTime")
+            {
+                DateTime dummy;
+                if (!DateTime.TryParse(c.Text, out dummy))
+                {
+                    throw (new Exception("Please enter a DateTime Value MM/DD/YYYY"));
+                }
+            }
+
             if (c.Tag == "Numerical")
             {
                 double dummy;
@@ -157,15 +168,6 @@ namespace Payroll
                 if (dummy < 0)
                 {
                     throw (new Exception("Numerical values should be postive values"));
-                }
-            }
-
-            if (c.Tag == "DateTime")
-            {
-                DateTime dummy;
-                if (!DateTime.TryParse(c.Text, out dummy))
-                {
-                    throw (new Exception("Please enter a DateTime Value MM/DD/YYYY"));
                 }
             }
         }

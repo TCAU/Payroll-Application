@@ -32,7 +32,6 @@ namespace Payroll
             try
             {
                 command = new SQLiteCommand("select * from employee_table order by employee_id asc", dbConnection);
-
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
                 table = new DataTable();
                 adapter.Fill(table);
